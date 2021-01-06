@@ -22,14 +22,14 @@ public class BookServiceTest {
 
 	@InjectMocks
 	private BookService service = new BookServiceImpl();
-	
+	//MockBean
 	@Mock
 	private BookRepository bookRepository;
 	
 	
 	@BeforeEach
 	public void setUp() {
-		//service = new BookServiceImpl();
+		//service = new BookServiceImpl(bookRepository);
 	}
 	
 
