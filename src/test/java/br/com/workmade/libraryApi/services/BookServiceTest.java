@@ -22,7 +22,7 @@ public class BookServiceTest {
 
 	@InjectMocks
 	private BookService service = new BookServiceImpl();
-	//MockBean
+	//@MockBean
 	@Mock
 	private BookRepository bookRepository;
 	
