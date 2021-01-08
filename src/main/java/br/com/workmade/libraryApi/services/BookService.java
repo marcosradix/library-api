@@ -5,6 +5,9 @@ import br.com.workmade.libraryApi.models.Book;
 public interface BookService {
 
 	Book save(Book any);
+
+	Book findById(Long id);
+	
 	
 
 }

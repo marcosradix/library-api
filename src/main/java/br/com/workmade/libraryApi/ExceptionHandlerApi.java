@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.validation.BindingResult;
 
+import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 
 public class ExceptionHandlerApi {
@@ -19,6 +20,10 @@ public class ExceptionHandlerApi {
 	}
 
 	public ExceptionHandlerApi(BusinessException e) {
+		this.errors = Arrays.asList(e.getMessage());
+	}
+
+	public ExceptionHandlerApi(BookNotFoundException e) {
 		this.errors = Arrays.asList(e.getMessage());
 	}
 

@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.workmade.libraryApi.ExceptionHandlerApi;
 import br.com.workmade.libraryApi.dtos.BookDTO;
+import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.services.BookService;
@@ -43,6 +46,22 @@ public class BookController {
     	BookDTO newBookDTO = modelMapper.map(bookSaved, BookDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBookDTO);
     }
+    
+    
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<BookDTO> findById(@PathVariable Long id) {
+    	
+    	Book bookFound = bookService.findById(id);
+    	
+    	BookDTO bookFoundDTO = modelMapper.map(bookFound, BookDTO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(bookFoundDTO);
+    }
+    
+    
+    
+    
+   
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionHandlerApi handleValidationExceptions(MethodArgumentNotValidException e) {
@@ -50,6 +69,12 @@ public class BookController {
     	return new ExceptionHandlerApi(bindResult);
     }
     
+    
+    @ExceptionHandler(BookNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ExceptionHandlerApi handleValidationExceptions(BookNotFoundException e) {
+    	return new ExceptionHandlerApi(e);
+    }
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionHandlerApi handleBookController(BusinessException e) {

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -24,6 +25,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.workmade.libraryApi.dtos.BookDTO;
+import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.services.BookService;
@@ -89,6 +91,7 @@ public class BookControllerTest {
 		String json = new ObjectMapper().writeValueAsString(createNewBook());
 		
 		given(bookService.save(any(Book.class))).willThrow(new BusinessException(messageErro));
+		
 		var request = MockMvcRequestBuilders.post(BOOK_API).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON).content(json);
 		
@@ -103,6 +106,45 @@ public class BookControllerTest {
 		return BookDTO.builder().title("Meu Livro").author("Author").isbn("1213212").build();
 	}
 	
+	@Test
+	@DisplayName("Deve obter informações de um livro")
+	public void getBookDetails() throws Exception {
+		Long id = 11L;
+		Book book = new Book();
+		BeanUtils.copyProperties(createNewBook(), book);
+		book.setId(id);
+		
+		given(bookService.findById(id)).willReturn(book);
+		
+		var request = MockMvcRequestBuilders.get(BOOK_API.concat("/"+id))
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		mvc.perform(request)
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("id").value(11L))
+		.andExpect(jsonPath("title").value(book.getTitle()))
+		.andExpect(jsonPath("author").value(book.getAuthor()))
+		.andExpect(jsonPath("isbn").value(book.getIsbn()));
+		
+	}
+	
+	@Test
+	@DisplayName("Deve retornar uma exception de livro não existente quando não encontrar o livro")
+	public void shouldReturnBookNotFoundException() throws Exception {
+		Long id = Mockito.anyLong();
+		String messageErro = "Livro não encontrado";
+		given(bookService.findById(id)).willThrow(new BookNotFoundException("Livro não encontrado"));
+		
+		var request = MockMvcRequestBuilders.get(BOOK_API.concat("/"+id))
+				.contentType(MediaType.APPLICATION_JSON);
+		
+
+		mvc.perform(request)
+		.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
+		.andExpect(jsonPath("errors", Matchers.hasSize(1)))
+		.andExpect(jsonPath("errors[0]").value(messageErro));
+		
+	}
 	
 }
 

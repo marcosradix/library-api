@@ -2,6 +2,7 @@ package br.com.workmade.libraryApi.services.impl;
 
 import org.springframework.stereotype.Service;
 
+import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.repository.BookRepository;
@@ -32,6 +33,12 @@ public class BookServiceImpl implements BookService {
 			
 		}
 		return repository.save(book);
+	}
+
+
+	@Override
+	public Book findById(Long id) {
+		return repository.findById(id).orElseThrow(() ->  new BookNotFoundException("Livro não encontrado"));
 	}
 
 }
