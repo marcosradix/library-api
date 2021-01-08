@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.workmade.libraryApi.ExceptionHandlerApi;
 import br.com.workmade.libraryApi.dtos.BookDTO;
+import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.services.BookService;
 
@@ -48,5 +49,20 @@ public class BookController {
     	BindingResult bindResult = e.getBindingResult();
     	return new ExceptionHandlerApi(bindResult);
     }
+    
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionHandlerApi handleBookController(BusinessException e) {
+    	return new ExceptionHandlerApi(e);
+    }
 
 }
+
+
+
+
+
+
+
+
+

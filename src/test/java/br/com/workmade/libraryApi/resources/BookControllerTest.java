@@ -1,5 +1,7 @@
 package br.com.workmade.libraryApi.resources;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -7,7 +9,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,6 +24,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.workmade.libraryApi.dtos.BookDTO;
+import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.services.BookService;
 
@@ -44,16 +46,18 @@ public class BookControllerTest {
 	@Test
 	@DisplayName("Deve criar um livro com sucesso")
 	public void createBookTest() throws Exception{
-		var bookDTO = BookDTO.builder().title("Meu Livro").author("Author").isbn("1213212").build();
+		var bookDTO = createNewBook();
 		
 		var book = Book.builder().id(101L).title("Meu Livro").author("Author").isbn("1213212").build();
 		
-		BDDMockito.given(bookService.save(Mockito.any(Book.class))).willReturn(book);
+		given(bookService.save(Mockito.any(Book.class))).willReturn(book);
 		
 		
 		String json = new ObjectMapper().writeValueAsString(bookDTO);
-		var request = MockMvcRequestBuilders.post(BOOK_API).contentType(MediaType.APPLICATION_JSON)
-		.accept(MediaType.APPLICATION_JSON).content(json);
+		var request = MockMvcRequestBuilders
+				.post(BOOK_API)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON).content(json);
 		
 		mvc.perform(request)
 		.andExpect(status().isCreated())
@@ -63,7 +67,7 @@ public class BookControllerTest {
 		.andExpect(jsonPath("isbn").value(bookDTO.getIsbn()));
 		
 	}
-	
+
 	
 	@Test
 	@DisplayName("Deve lançar erro de validação quando não houver dados sufucuente para criação de um livro")
@@ -77,6 +81,28 @@ public class BookControllerTest {
 		.andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
 		.andExpect(jsonPath("errors", Matchers.hasSize(3)));
 	}
+	
+	@Test
+	@DisplayName("Deve lançar erro ao tentar cadastrar um livro com isbn já em uso")
+	public void createBookWithDuplicatedIsbn() throws Exception {
+		String messageErro = "Isbn já cadastrado";
+		String json = new ObjectMapper().writeValueAsString(createNewBook());
+		
+		given(bookService.save(any(Book.class))).willThrow(new BusinessException(messageErro));
+		var request = MockMvcRequestBuilders.post(BOOK_API).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON).content(json);
+		
+		mvc.perform(request)
+		.andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
+		.andExpect(jsonPath("errors", Matchers.hasSize(1)))
+		.andExpect(jsonPath("errors[0]").value(messageErro));
+		
+	}
+	
+	private BookDTO createNewBook() {
+		return BookDTO.builder().title("Meu Livro").author("Author").isbn("1213212").build();
+	}
+	
 	
 }
 
