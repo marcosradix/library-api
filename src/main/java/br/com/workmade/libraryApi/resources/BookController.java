@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +60,17 @@ public class BookController {
     }
     
     
+    
+    
+    
+    @DeleteMapping("/{id}/remover")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    	
+    	Book bookFound = bookService.findById(id);
+    	
+    	bookService.deleteById(bookFound.getId());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
     
     
    

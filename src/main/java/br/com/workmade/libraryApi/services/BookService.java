@@ -9,5 +9,7 @@ public interface BookService {
 	Book findById(Long id);
 	
 	
+	void deleteById(Long id);
+	
 
 }

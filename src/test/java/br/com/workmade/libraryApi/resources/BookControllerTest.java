@@ -9,6 +9,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,6 +144,41 @@ public class BookControllerTest {
 		.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
 		.andExpect(jsonPath("errors", Matchers.hasSize(1)))
 		.andExpect(jsonPath("errors[0]").value(messageErro));
+		
+	}
+	
+	
+	@Test
+	@DisplayName("Deve deletar um livro e retornar status NoContent")
+	public void shouldDeleteBookAndReturnStatusNoContent() throws Exception {
+		Long id = Mockito.anyLong();
+
+		
+		given(bookService.findById(id)).willReturn(Book.builder().id(id).build());
+		
+		var request = MockMvcRequestBuilders.delete(BOOK_API.concat("/"+id+"/remover"))
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		mvc.perform(request) .andExpect(status().isNoContent());
+		
+	}
+	
+	
+	@Test
+	@DisplayName("Deve retornar resource not found ao deletar livro inexistente")
+	public void shouldThrowBookNotFoundExceptionWhenDeleteBookThatNotExists() throws Exception {
+		Long id = Mockito.anyLong();
+		
+		given(bookService.findById(id)).willThrow(new BookNotFoundException("Livro não encontrado para deletar"));
+		
+		var request = MockMvcRequestBuilders.delete(BOOK_API.concat("/"+id+"/remover"))
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		String  messageErro = "Livro não encontrado para deletar";
+		mvc.perform(request)
+		.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
+		.andExpect(jsonPath("errors", Matchers.hasSize(1)))
+		.andExpect(jsonPath("errors[0]").value(messageErro ));
 		
 	}
 	

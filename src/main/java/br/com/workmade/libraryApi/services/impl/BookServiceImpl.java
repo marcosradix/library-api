@@ -41,6 +41,13 @@ public class BookServiceImpl implements BookService {
 		return repository.findById(id).orElseThrow(() ->  new BookNotFoundException("Livro não encontrado"));
 	}
 
+
+	@Override
+	public void deleteById(Long id) {
+		repository.deleteById(id);
+		
+	}
+
 }
 
 
