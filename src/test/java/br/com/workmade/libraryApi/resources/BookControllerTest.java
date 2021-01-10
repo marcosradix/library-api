@@ -9,7 +9,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,6 +174,53 @@ public class BookControllerTest {
 				.contentType(MediaType.APPLICATION_JSON);
 		
 		String  messageErro = "Livro não encontrado para deletar";
+		mvc.perform(request)
+		.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
+		.andExpect(jsonPath("errors", Matchers.hasSize(1)))
+		.andExpect(jsonPath("errors[0]").value(messageErro ));
+		
+	}
+	
+	@Test
+	@DisplayName("Deve atualizar um livro")
+	public void updateBook() throws Exception {
+		
+		Long id = 11L;
+		String json = new ObjectMapper().writeValueAsString(createNewBook());
+		
+		Book bookToUpdate = Book.builder().id(id).title("Some title").author("Some Author").isbn("321").build();
+		
+		given(bookService.findById(id)).willReturn(bookToUpdate);
+		
+		given(bookService.update(bookToUpdate)).willReturn(bookToUpdate);
+		
+		var request = MockMvcRequestBuilders.put(BOOK_API.concat("/"+id))
+				.contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON);
+		
+		mvc.perform(request) 
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("id").value(11L))
+		.andExpect(jsonPath("title").value(bookToUpdate.getTitle()))
+		.andExpect(jsonPath("author").value(bookToUpdate.getAuthor()))
+		.andExpect(jsonPath("isbn").value(bookToUpdate.getIsbn()));
+		
+	}
+	
+	
+	@Test
+	@DisplayName("Deve retornar 404 ao tentar atualizar um livro inexistente")
+	public void shouldReturn404WhenTryUpdateInxixtentBook() throws Exception {
+		
+		Long id = Mockito.anyLong();
+		String  messageErro = "Livro não encontrado para deletar";
+		
+		String json = new ObjectMapper().writeValueAsString(createNewBook());
+		
+		given(bookService.findById(id)).willThrow(new BookNotFoundException(messageErro));
+		
+		var request = MockMvcRequestBuilders.put(BOOK_API.concat("/"+id))
+				.contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON);
+		
 		mvc.perform(request)
 		.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
 		.andExpect(jsonPath("errors", Matchers.hasSize(1)))

@@ -1,9 +1,14 @@
 package br.com.workmade.libraryApi.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.repository.BookRepository;
@@ -71,6 +77,81 @@ public class BookServiceTest {
 		assertThat(exception).isInstanceOf(BusinessException.class).hasMessage(messageErro);
 		
 		verify(bookRepository, never()).save(book);
+		
+	}
+	
+	
+	@DisplayName("Deve obter um livro por id")
+	@Test
+	public void getBookById() {
+		Long id = 1L;
+		Book validBook = createValidBook();
+		validBook.setId(id);
+		when(bookRepository.findById(id)).thenReturn(Optional.of(validBook));
+		
+		Book foundBook = service.findById(id);
+		
+		assertNotNull(foundBook);
+		assertThat(foundBook.getId()).isEqualTo(id);
+		assertThat(foundBook.getTitle()).isEqualTo(validBook.getTitle());
+		assertThat(foundBook.getAuthor()).isEqualTo(validBook.getAuthor());
+		assertThat(foundBook.getIsbn()).isEqualTo(validBook.getIsbn());
+		
+	}
+	
+	
+	@DisplayName("Deve retornar booknotfoundexception para livro não encontrado")
+	@Test
+	public void bookNotFoundByIdException() {
+		Long id = Mockito.anyLong();
+	    String message = "Livro não encontrado";
+	
+		when(bookRepository.findById(id)).thenThrow(new BookNotFoundException(message));
+		
+		assertThrows(BookNotFoundException.class, ()->{
+			service.findById(id);
+		});
+		
+	}
+	
+	@DisplayName("Deve retornar o livro atualizado")
+	@Test
+	public void updateBook() {
+
+		
+	}
+	
+	
+	@DisplayName("Deve remover um livro pelo id")
+	@Test
+	public void deleteBookById() {
+		var book = Book.builder().id(1L).title("As Aventuras").author("Fulano").isbn("123").build();
+		
+		when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+		when(service.save(book)).thenReturn(Book.builder().id(1L).title("As Aventuras").author("Fulano").isbn("123").build());
+		
+		Book bookSaved = service.save(book);
+		
+	  org.junit.jupiter.api.Assertions.assertDoesNotThrow( () -> service.deleteById(bookSaved.getId()));
+		
+		verify(bookRepository, times(1)).deleteById(book.getId());
+		
+		
+	}
+	
+	
+	
+	@DisplayName("Deve lançar BookNotFoundException ao remover um livro pelo id que não existe")
+	@Test
+	public void bookNotFoundExceptionWhenDeleteById() {
+		var book = Book.builder().id(1L).title("As Aventuras").author("Fulano").isbn("123").build();
+		
+		  org.junit.jupiter.api.Assertions.assertThrows(BookNotFoundException.class, () -> {
+			  
+			  service.deleteById(book.getId());
+		  } );
+		  
+		  verify(bookRepository, never()).deleteById(book.getId());
 		
 	}
 	

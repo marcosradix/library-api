@@ -1,6 +1,9 @@
 package br.com.workmade.libraryApi.remository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,6 +53,26 @@ public class BookRepositoryTest {
 		boolean existsByIsbn = bookRepository.existsByIsbn(isbn);
 		
 		assertThat(existsByIsbn).isFalse();
+	}
+	
+	
+	@Test
+	@DisplayName("Deve obter um livro por id")
+	public void getBookByID() {
+		
+		Book book = createNewBook();
+		
+		testEntityManager.persist(book);
+		
+		Optional<Book> foundBook = bookRepository.findById(book.getId());
+		
+		assertTrue(foundBook.isPresent());
+		
+	}
+	
+	
+	private Book createNewBook() {
+		return Book.builder().title("Meu Livro").author("Author").isbn("1213212").build();
 	}
 	
 

@@ -4,6 +4,7 @@ package br.com.workmade.libraryApi.resources;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,7 +40,7 @@ public class BookController {
 	
 	
     @PostMapping
-    public ResponseEntity<BookDTO> salvar(@RequestBody @Valid BookDTO bookDTO) {
+    public ResponseEntity<BookDTO> save(@RequestBody @Valid BookDTO bookDTO) {
     	
     	Book newBook = modelMapper.map(bookDTO, Book.class);
     	
@@ -46,6 +48,22 @@ public class BookController {
     	
     	BookDTO newBookDTO = modelMapper.map(bookSaved, BookDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBookDTO);
+    }
+    
+    
+	
+    @PutMapping("/{id}")
+    public ResponseEntity<BookDTO> update(@RequestBody @Valid BookDTO bookDTO, @PathVariable Long id) {
+    	
+    	Book bookFound = bookService.findById(id);
+    	
+    	
+    	BeanUtils.copyProperties(bookDTO, bookFound, "id");
+    	
+    	Book bookSaved = bookService.update(bookFound);
+    	
+    	BookDTO newBookDTO = modelMapper.map(bookSaved, BookDTO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(newBookDTO);
     }
     
     
