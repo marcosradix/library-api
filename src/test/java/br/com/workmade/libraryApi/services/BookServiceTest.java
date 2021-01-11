@@ -1,6 +1,7 @@
 package br.com.workmade.libraryApi.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.never;
@@ -117,7 +118,35 @@ public class BookServiceTest {
 	@DisplayName("Deve retornar o livro atualizado")
 	@Test
 	public void updateBook() {
-
+		
+		var bookToUpdate = Book.builder().id(1L).title("As Aventuras").author("Fulano").isbn("123").build();
+		
+		var bookUpdated = Book.builder().id(1L).title("As Aventuras 2").author("Fulano 2").isbn("1232").build();
+		
+		when(service.update(bookToUpdate)).thenReturn(bookUpdated);
+		Book bookSaved = service.update(bookToUpdate);
+		
+		assertThat(bookSaved.getId()).isEqualTo(1L);
+		assertThat(bookSaved.getIsbn()).isEqualTo("1232");
+		assertThat(bookSaved.getTitle()).isEqualTo("As Aventuras 2");
+		assertThat(bookSaved.getAuthor()).isEqualTo("Fulano 2");
+		
+		verify(bookRepository, times(1)).save(bookToUpdate);
+		
+	}
+	
+	
+	@DisplayName("Deve lançar BookNotFoundException ao tentar atualizar livro inexistente")
+	@Test
+	public void bookNotFoundExceptionWhenTryToUpdate() {
+		var book = Book.builder().build();
+		
+		assertThrows(BookNotFoundException.class, () -> {
+			  
+			  service.update(book);
+		  } );
+		  
+		  verify(bookRepository, never()).save(book);
 		
 	}
 	
@@ -132,7 +161,7 @@ public class BookServiceTest {
 		
 		Book bookSaved = service.save(book);
 		
-	  org.junit.jupiter.api.Assertions.assertDoesNotThrow( () -> service.deleteById(bookSaved.getId()));
+	  assertDoesNotThrow( () -> service.deleteById(bookSaved.getId()));
 		
 		verify(bookRepository, times(1)).deleteById(book.getId());
 		
@@ -146,7 +175,7 @@ public class BookServiceTest {
 	public void bookNotFoundExceptionWhenDeleteById() {
 		var book = Book.builder().id(1L).title("As Aventuras").author("Fulano").isbn("123").build();
 		
-		  org.junit.jupiter.api.Assertions.assertThrows(BookNotFoundException.class, () -> {
+		assertThrows(BookNotFoundException.class, () -> {
 			  
 			  service.deleteById(book.getId());
 		  } );

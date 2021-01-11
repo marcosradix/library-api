@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.workmade.libraryApi.ExceptionHandlerApi;
 import br.com.workmade.libraryApi.dtos.BookDTO;
 import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
+import br.com.workmade.libraryApi.exception.handler.ExceptionHandlerApi;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.services.BookService;
 

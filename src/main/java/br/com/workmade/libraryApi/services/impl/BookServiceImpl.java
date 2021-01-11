@@ -52,6 +52,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Book update(Book book) {
+		findById(book.getId());
 		return repository.save(book);
 	}
 

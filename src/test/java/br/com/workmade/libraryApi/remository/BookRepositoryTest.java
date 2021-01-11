@@ -1,6 +1,8 @@
 package br.com.workmade.libraryApi.remository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
@@ -70,6 +72,34 @@ public class BookRepositoryTest {
 		
 	}
 	
+	@Test
+	@DisplayName("Deve salvar um livro")
+	public void saveBook() {
+		
+		var book = createNewBook();
+
+		Book bookSaved = bookRepository.save(book);
+		
+		assertNotNull(bookSaved.getId());
+		
+	}
+	
+	@Test
+	@DisplayName("Deve remover um livro")
+	public void deleteBook() {
+		
+		Book book = createNewBook();
+		
+		testEntityManager.persist(book);
+		
+		Book bookFound = testEntityManager.find(Book.class, book.getId());
+		assertNotNull(bookFound);
+		bookRepository.delete(bookFound);
+		
+		Book bookDeleted = testEntityManager.find(Book.class, book.getId());
+		assertNull(bookDeleted);
+
+	}
 	
 	private Book createNewBook() {
 		return Book.builder().title("Meu Livro").author("Author").isbn("1213212").build();

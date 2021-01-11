@@ -1,4 +1,4 @@
-package br.com.workmade.libraryApi;
+package br.com.workmade.libraryApi.exception.handler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
