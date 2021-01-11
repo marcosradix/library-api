@@ -93,6 +93,14 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.5</version>
+				 <configuration>
+                    <excludes>
+                       <!-- Exclude class from test coverage -->
+                        <exclude>br/com/workmade/libraryApi/dtos/*.*</exclude>
+                        <!-- Exclude full package from test coverage -->
+                        <exclude>br/com/workmade/libraryApi/models/*.*</exclude>
+                    </excludes>
+                </configuration>
 				<executions>
 					<execution>
 						<goals>
