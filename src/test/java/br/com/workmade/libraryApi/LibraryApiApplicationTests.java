@@ -10,6 +10,7 @@ class LibraryApiApplicationTests {
 	@Test
 	@DisplayName("primeiro teste")
 	void contextLoads() {
+		LibraryApiApplication.main(new String[] {});
 	}
 
 }

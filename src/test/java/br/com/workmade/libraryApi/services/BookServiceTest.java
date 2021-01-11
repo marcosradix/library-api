@@ -122,7 +122,7 @@ public class BookServiceTest {
 		var bookToUpdate = Book.builder().id(1L).title("As Aventuras").author("Fulano").isbn("123").build();
 		
 		var bookUpdated = Book.builder().id(1L).title("As Aventuras 2").author("Fulano 2").isbn("1232").build();
-		
+		when(bookRepository.findById(bookToUpdate.getId())).thenReturn(Optional.ofNullable(bookToUpdate));
 		when(service.update(bookToUpdate)).thenReturn(bookUpdated);
 		Book bookSaved = service.update(bookToUpdate);
 		
