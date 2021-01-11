@@ -1,11 +1,17 @@
 package br.com.workmade.libraryApi.resources;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -66,7 +72,17 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.OK).body(newBookDTO);
     }
     
-    
+    @GetMapping
+    public Page<BookDTO> find( BookDTO dto, Pageable pageRequest ){
+        Book filter = modelMapper.map(dto, Book.class);
+        Page<Book> result = bookService.find(filter, pageRequest);
+        List<BookDTO> list = result.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, BookDTO.class))
+                .collect(Collectors.toList());
+
+        return new PageImpl<BookDTO>( list, pageRequest, result.getTotalElements() );
+    }
     
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> findById(@PathVariable Long id) {
