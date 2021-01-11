@@ -1,4 +1,4 @@
-package br.com.workmade.libraryApi.services;
+package br.com.workmade.libraryApi.services.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -25,11 +25,11 @@ import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.repository.BookRepository;
-import br.com.workmade.libraryApi.services.impl.BookServiceImpl;
+import br.com.workmade.libraryApi.services.BookService;
 
 
 @ExtendWith(SpringExtension.class)
-public class BookServiceTest {
+public class BookServiceImplTest {
 	
 
 	@InjectMocks
