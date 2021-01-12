@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.workmade.libraryApi.exception.BookByIsbnNotFoundException;
 import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
@@ -72,6 +73,12 @@ public class BookServiceImpl implements BookService {
         );
         return repository.findAll(example, pageRequest);
     }
+
+
+	@Override
+	public Book findByIsbn(String isbn) {
+		return repository.findByIsbnLike(isbn).orElseThrow(() -> new BookByIsbnNotFoundException(isbn));
+	}
 
 }
 
