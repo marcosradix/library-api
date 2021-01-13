@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.workmade.libraryApi.models.Loan;
 import br.com.workmade.libraryApi.repository.LoanRepository;
+import br.com.workmade.libraryApi.services.BookService;
 import br.com.workmade.libraryApi.services.LoanService;
 
 @Service
@@ -12,9 +13,12 @@ public class LoanServiceImpl implements LoanService {
 	@Autowired
 	private LoanRepository loanRepository;
 
+	@Autowired
+	private BookService bookService;
 	
 	@Override
 	public Loan save(Loan loan) {
+		bookService.findById(loan.getId());
 		return loanRepository.save(loan);
 	}
 

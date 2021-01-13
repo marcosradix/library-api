@@ -2,18 +2,22 @@ package br.com.workmade.libraryApi.resources;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -23,6 +27,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.workmade.libraryApi.dtos.LoanDTO;
+import br.com.workmade.libraryApi.exception.LoanBookNotFoundException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.models.Loan;
 import br.com.workmade.libraryApi.services.BookService;
@@ -60,12 +65,40 @@ public class LoanControllerTest {
 				.accept(MediaType.APPLICATION_JSON).content(json);
 		
 		mvc.perform(request).andExpect(status().isCreated())
-		.andExpect(jsonPath("id").value(11));
+		.andExpect(content().string("1"));
+		
+	}
+	
+	@Test
+	@DisplayName("Deve lançar BookNotFoundException ao criar loan com livro inexistente")
+	public void shouldReturnBookNotFoundExceptionWhenTryCreateLoan() throws Exception{
+		String message = "Livro não encontrado";
+		LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").build();
+		String json = new ObjectMapper().writeValueAsString(dto);
+		given(bookService.findByIsbn(Mockito.anyString())).willThrow(new LoanBookNotFoundException(message));
+		
+		
+		var request = MockMvcRequestBuilders.post(LOAN_API).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON).content(json);
+		
+		mvc.perform(request).andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
+		.andExpect(jsonPath("errors", Matchers.hasSize(1))).andExpect(jsonPath("errors[0]").value(message));
 		
 	}
 	
 	private Book createBook() {
-		return Book.builder().id(1L).title("Meu Livro").author("Author").isbn("1213212").build();
+		return Book.builder().id(11L).title("Meu Livro").author("Author").isbn("1213212").build();
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
