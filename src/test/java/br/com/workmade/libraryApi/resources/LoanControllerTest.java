@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.workmade.libraryApi.dtos.LoanDTO;
+import br.com.workmade.libraryApi.exception.AlreadyLoanedBookFoundException;
 import br.com.workmade.libraryApi.exception.LoanBookNotFoundException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.models.Loan;
@@ -82,6 +83,27 @@ public class LoanControllerTest {
 				.accept(MediaType.APPLICATION_JSON).content(json);
 		
 		mvc.perform(request).andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
+		.andExpect(jsonPath("errors", Matchers.hasSize(1))).andExpect(jsonPath("errors[0]").value(message));
+		
+	}
+	
+	
+	@Test
+	@DisplayName("Deve retornar erro ao tentar pegar um livro já emprestado")
+	public void loanedBookErrorOnCreateLoan() throws Exception{
+		String message = "Livro já emprestado";
+		LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").build();
+		String json = new ObjectMapper().writeValueAsString(dto);
+		
+		given(bookService.findByIsbn("123")).willReturn(Book.builder().id(11L).isbn("123").build());
+		
+		given(loanService.save(Mockito.any(Loan.class))).willThrow(new AlreadyLoanedBookFoundException(message));
+		
+		var request = MockMvcRequestBuilders.post(LOAN_API).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON).content(json);
+		
+		mvc.perform(request).andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
+		.andExpect(jsonPath("errors", Matchers.hasSize(1)))
 		.andExpect(jsonPath("errors", Matchers.hasSize(1))).andExpect(jsonPath("errors[0]").value(message));
 		
 	}

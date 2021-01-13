@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.validation.BindingResult;
 
+import br.com.workmade.libraryApi.exception.AlreadyLoanedBookFoundException;
 import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.exception.LoanBookNotFoundException;
@@ -29,6 +30,10 @@ public class ExceptionHandlerApi {
 	}
 
 	public ExceptionHandlerApi(LoanBookNotFoundException e) {
+		this.errors = Arrays.asList(e.getMessage());
+	}
+
+	public ExceptionHandlerApi(AlreadyLoanedBookFoundException e) {
 		this.errors = Arrays.asList(e.getMessage());
 	}
 

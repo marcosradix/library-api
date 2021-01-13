@@ -35,4 +35,10 @@ public class ApiControllerAdvice {
     public ExceptionHandlerApi handleValidationExceptions(LoanBookNotFoundException e) {
     	return new ExceptionHandlerApi(e);
     }
+    
+    @ExceptionHandler(AlreadyLoanedBookFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionHandlerApi handleAlreadyLoanedBookFoundException(AlreadyLoanedBookFoundException e) {
+    	return new ExceptionHandlerApi(e);
+    }
 }
