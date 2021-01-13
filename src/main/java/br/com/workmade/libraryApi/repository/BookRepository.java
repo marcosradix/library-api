@@ -12,7 +12,7 @@ public interface BookRepository extends JpaRepository<Book, Long>{
 
 	boolean existsByIsbn(String isbn);
 	
-	Optional<Book> findByIsbnLike(String isbn);
+	Optional<Book> findByIsbnContainingIgnoreCase(String isbn);
 	
 
 }

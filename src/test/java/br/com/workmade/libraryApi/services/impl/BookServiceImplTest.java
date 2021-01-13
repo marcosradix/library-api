@@ -49,6 +49,10 @@ public class BookServiceImplTest {
 	private BookRepository bookRepository;
 	
 	
+	@Mock
+	private BookService bookService;
+	
+	
 	@BeforeEach
 	public void setUp() {
 		//service = new BookServiceImpl(bookRepository);// caso queira passar via construtor trocar para mockBean no repository
@@ -218,6 +222,17 @@ public class BookServiceImplTest {
 	
 	private Book createValidBook() {
 		return Book.builder().title("As Aventuras").author("Fulano").isbn("123").build();
+	}
+	
+	@Test
+    @DisplayName("Deve retornar um livro pelo isbn")
+    public void shouldReturnBookByIsbn(){
+		String isbn = "123";
+		
+		when(bookRepository.findByIsbnContainingIgnoreCase(isbn)).thenReturn(Optional.of(createValidBook()));
+		
+		Book findByIsbn = bookService.findByIsbn(isbn);
+		
 	}
 
 }
