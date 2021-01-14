@@ -1,5 +1,7 @@
 package br.com.workmade.libraryApi.services;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -12,6 +14,8 @@ public interface BookService {
 	Book update(Book book);
 
 	Book findById(Long id);
+	
+	Optional<Book> findByIsbnOptional(String isbn);
 	
 	Book findByIsbn(String isbn);
 	

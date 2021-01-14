@@ -1,5 +1,8 @@
 package br.com.workmade.libraryApi.services.impl;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
@@ -17,14 +20,8 @@ import br.com.workmade.libraryApi.services.BookService;
 public class BookServiceImpl implements BookService {
 
 	
-
+	@Autowired
 	private BookRepository repository;
-	
-	
-	public BookServiceImpl(BookRepository bookRepository) {
-		this.repository = bookRepository;
-	}
-
 
 	public BookServiceImpl() {
 
@@ -78,6 +75,12 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book findByIsbn(String isbn) {
 		return repository.findByIsbnContainingIgnoreCase(isbn).orElseThrow(() -> new BookByIsbnNotFoundException(isbn));
+	}
+
+
+	@Override
+	public Optional<Book> findByIsbnOptional(String isbn) {
+		return repository.findByIsbn(isbn);
 	}
 
 }

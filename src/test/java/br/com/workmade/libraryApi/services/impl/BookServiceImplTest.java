@@ -49,9 +49,6 @@ public class BookServiceImplTest {
 	private BookRepository bookRepository;
 	
 	
-	@Mock
-	private BookService bookService;
-	
 	
 	@BeforeEach
 	public void setUp() {
@@ -227,14 +224,19 @@ public class BookServiceImplTest {
 	@Test
     @DisplayName("Deve retornar um livro pelo isbn")
     public void shouldReturnBookByIsbn(){
-		String isbn = "123";
+		String isbn = "1230";
+	
+		when(bookRepository.findByIsbnContainingIgnoreCase(isbn)).thenReturn(Optional.of(Book.builder().id(1L).isbn(isbn).build()));
 		
-		when(bookRepository.findByIsbnContainingIgnoreCase(isbn)).thenReturn(Optional.of(createValidBook()));
+		Book bookFound = service.findByIsbn(isbn);
 		
-		Book findByIsbn = bookService.findByIsbn(isbn);
+		assertNotNull(bookFound);
+		assertThat(bookFound.getId()).isEqualTo(1L);
+		assertThat(bookFound.getIsbn()).isEqualTo(isbn);
 		
+		verify(bookRepository, times(1)).findByIsbnContainingIgnoreCase(isbn);
 	}
-
+	
 }
 
 
