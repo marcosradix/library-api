@@ -28,6 +28,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import br.com.workmade.libraryApi.exception.BookByIsbnNotFoundException;
 import br.com.workmade.libraryApi.exception.BookNotFoundException;
 import br.com.workmade.libraryApi.exception.BusinessException;
 import br.com.workmade.libraryApi.models.Book;
@@ -230,12 +231,12 @@ public class BookServiceImplTest {
 	@Test
 	@DisplayName("Deve retornar BookByIsbnNotFoundException pelo isbn não encontrado")
 	public void shouldReturnBookByIsbnNotFoundExceptionByIsbn() {
-		String message = "Livro não encontrado";
+		String message = "123";
 
 		when(bookRepository.findByIsbnContainingIgnoreCase(Mockito.anyString()))
-				.thenThrow(new BookNotFoundException(message));
+				.thenThrow(new BookByIsbnNotFoundException(message));
 
-		assertThrows(BookNotFoundException.class, () -> {
+		assertThrows(BookByIsbnNotFoundException.class, () -> {
 			service.findByIsbn(Mockito.anyString());
 		});
 
