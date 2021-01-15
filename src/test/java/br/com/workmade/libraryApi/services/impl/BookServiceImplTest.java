@@ -25,6 +25,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.workmade.libraryApi.exception.BookNotFoundException;
@@ -35,6 +36,7 @@ import br.com.workmade.libraryApi.services.BookService;
 
 
 @ExtendWith(SpringExtension.class)
+@ActiveProfiles("test")
 public class BookServiceImplTest {
 	
 
