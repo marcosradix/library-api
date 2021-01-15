@@ -105,5 +105,8 @@ public class BookRepositoryTest {
 		return Book.builder().title("Meu Livro").author("Author").isbn("1213212").build();
 	}
 	
+    public static Book createNewBook(String isbn) {
+        return Book.builder().title("Aventuras").author("Fulano").isbn(isbn).build();
+    }
 
 }

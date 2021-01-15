@@ -9,6 +9,6 @@ import br.com.workmade.libraryApi.models.Loan;
 @Repository
 public interface LoanRepository extends JpaRepository<Loan, Long>{
 	
-	boolean existsByBookAndNotReturned(Book book);
+	boolean existsByBookAndReturnedFalse(Book book);
 
 }

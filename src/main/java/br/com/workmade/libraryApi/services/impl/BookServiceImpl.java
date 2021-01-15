@@ -1,7 +1,5 @@
 package br.com.workmade.libraryApi.services.impl;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -78,10 +76,6 @@ public class BookServiceImpl implements BookService {
 	}
 
 
-	@Override
-	public Optional<Book> findByIsbnOptional(String isbn) {
-		return repository.findByIsbn(isbn);
-	}
 
 }
 

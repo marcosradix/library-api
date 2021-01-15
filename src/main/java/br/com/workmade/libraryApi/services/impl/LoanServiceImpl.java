@@ -21,7 +21,7 @@ public class LoanServiceImpl implements LoanService {
 	@Override
 	public Loan save(Loan loan) {
 		bookService.findById(loan.getId());
-		if(loanRepository.existsByBookAndNotReturned(loan.getBook())){
+		if(loanRepository.existsByBookAndReturnedFalse(loan.getBook())){
 			throw new AlreadyLoanedBookFoundException("Livro já emprestado");
 		}
 		return loanRepository.save(loan);

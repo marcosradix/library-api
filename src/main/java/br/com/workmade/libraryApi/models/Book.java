@@ -1,11 +1,13 @@
 package br.com.workmade.libraryApi.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,8 +40,8 @@ public class Book {
     
     private String isbn;
     @JsonIgnore
-    @OneToOne(mappedBy = "book")
-    private Loan loan;
+    @OneToMany( mappedBy = "book")
+    private List<Loan> loans;
 
 
 
