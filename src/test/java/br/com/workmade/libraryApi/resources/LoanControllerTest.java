@@ -2,11 +2,14 @@ package br.com.workmade.libraryApi.resources;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -27,6 +30,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.workmade.libraryApi.dtos.LoanDTO;
+import br.com.workmade.libraryApi.dtos.ReturnedLoanDTO;
 import br.com.workmade.libraryApi.exception.AlreadyLoanedBookFoundException;
 import br.com.workmade.libraryApi.exception.LoanBookNotFoundException;
 import br.com.workmade.libraryApi.models.Book;
@@ -107,6 +111,50 @@ public class LoanControllerTest {
 		.andExpect(jsonPath("errors", Matchers.hasSize(1))).andExpect(jsonPath("errors[0]").value(message));
 		
 	}
+	
+	@Test
+	@DisplayName("Deve retornar  um livro para loan")
+	public void returnBookLoanTest() throws Exception {
+		ReturnedLoanDTO returnedLoanDTO = new ReturnedLoanDTO();
+		returnedLoanDTO.setReturned(true);
+		String json = new ObjectMapper().writeValueAsString(returnedLoanDTO);
+		Loan loan = Loan.builder().id(1L).build();
+		given(loanService.findById(Mockito.anyLong())).willReturn(Optional.of(loan));
+		
+		var request = MockMvcRequestBuilders.patch(LOAN_API.concat("/1"))
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(json);
+		
+		mvc.perform(request).andExpect(status().isOk());
+		
+		verify(loanService, times(1)).save(loan);
+		
+	}
+	
+	
+	@Test
+	@DisplayName("Deve retornar 404 quando tentar devolver um livro inexistente")
+	public void returnInexistentBookLoanTest() throws Exception {
+		ReturnedLoanDTO returnedLoanDTO = new ReturnedLoanDTO();
+		returnedLoanDTO.setReturned(true);
+		String json = new ObjectMapper().writeValueAsString(returnedLoanDTO);
+	
+		
+		given(loanService.findById(Mockito.anyLong())).willReturn(Optional.empty());
+		
+		var request = MockMvcRequestBuilders.patch(LOAN_API.concat("/1"))
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(json);
+		
+		mvc.perform(request).andExpect(status().isNotFound());
+
+		
+	}
+	
+	
+	
 	
 	private Book createBook() {
 		return Book.builder().id(11L).title("Meu Livro").author("Author").isbn("1213212").build();

@@ -1,5 +1,7 @@
 package br.com.workmade.libraryApi.services.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +23,15 @@ public class LoanServiceImpl implements LoanService {
 	@Override
 	public Loan save(Loan loan) {
 		bookService.findById(loan.getId());
-		if(loanRepository.existsByBookAndReturnedFalse(loan.getBook())){
+		if(loanRepository.existsByBookAndNotReturned(loan.getBook())){
 			throw new AlreadyLoanedBookFoundException("Livro já emprestado");
 		}
 		return loanRepository.save(loan);
+	}
+
+	@Override
+	public Optional<Loan> findById(Long id) {
+		return loanRepository.findById(id);
 	}
 
 }

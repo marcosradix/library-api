@@ -64,7 +64,7 @@ public class LoanServiceTest {
 		Loan savingLoan = Loan.builder()
 				.book(createBook()).customer("Fulano").loanDate(LocalDate.now()).build();
 		
-		when(loanRepository.existsByBookAndReturnedFalse(createBook())).thenReturn(true);
+		when(loanRepository.existsByBookAndNotReturned(createBook())).thenReturn(true);
 		
 		Throwable exception = catchThrowable(() -> 	 loanService.save(savingLoan));
 		

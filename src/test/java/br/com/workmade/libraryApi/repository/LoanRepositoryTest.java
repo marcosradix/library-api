@@ -1,7 +1,6 @@
-package br.com.workmade.libraryApi.remository;
+package br.com.workmade.libraryApi.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 
@@ -16,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.models.Loan;
-import br.com.workmade.libraryApi.repository.LoanRepository;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -38,9 +36,9 @@ public class LoanRepositoryTest {
 	        Loan loan = createAndPersistLoan(LocalDate.now());
 	        Book book = loan.getBook();
 
-	        boolean exists = repository.existsByBookAndReturnedFalse(book);
+	        boolean exists = repository.existsByBookAndNotReturned(book);
 
-	        assertThat(!exists).isTrue();
+	        assertThat(exists).isTrue();
 	    }
     
     
