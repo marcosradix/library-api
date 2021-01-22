@@ -1,21 +1,17 @@
 package br.com.workmade.libraryApi.dtos;
 
-import br.com.workmade.libraryApi.models.Book;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-public class LoanDTO {
+@NoArgsConstructor
+public class LoanFilterDTO {
 	
-	private Long id;
 	private String isbn;
 	private String customer;
-	private Book book;
-	
 
 }

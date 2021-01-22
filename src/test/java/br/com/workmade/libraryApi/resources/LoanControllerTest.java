@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Optional;
 
 import org.hamcrest.Matchers;
@@ -20,6 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -30,6 +34,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.workmade.libraryApi.dtos.LoanDTO;
+import br.com.workmade.libraryApi.dtos.LoanFilterDTO;
 import br.com.workmade.libraryApi.dtos.ReturnedLoanDTO;
 import br.com.workmade.libraryApi.exception.AlreadyLoanedBookFoundException;
 import br.com.workmade.libraryApi.exception.LoanBookNotFoundException;
@@ -37,6 +42,7 @@ import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.models.Loan;
 import br.com.workmade.libraryApi.services.BookService;
 import br.com.workmade.libraryApi.services.LoanService;
+import br.com.workmade.libraryApi.services.impl.LoanServiceTest;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -115,12 +121,13 @@ public class LoanControllerTest {
 	@Test
 	@DisplayName("Deve retornar  um livro para loan")
 	public void returnBookLoanTest() throws Exception {
-		ReturnedLoanDTO returnedLoanDTO = new ReturnedLoanDTO();
-		returnedLoanDTO.setReturned(true);
-		String json = new ObjectMapper().writeValueAsString(returnedLoanDTO);
+		ReturnedLoanDTO returnedLoanDTO = ReturnedLoanDTO.builder().returned(true).build();
+		
 		Loan loan = Loan.builder().id(1L).build();
+		
 		given(loanService.findById(Mockito.anyLong())).willReturn(Optional.of(loan));
 		
+		String json = new ObjectMapper().writeValueAsString(returnedLoanDTO);
 		var request = MockMvcRequestBuilders.patch(LOAN_API.concat("/1"))
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)
@@ -153,7 +160,36 @@ public class LoanControllerTest {
 		
 	}
 	
-	
+
+	@Test
+	@DisplayName("Deve filtrar empréstimos")
+	public void findLoansTest() throws Exception {
+		Long id = 1L;
+		Book book = createBook();
+		Loan loan = LoanServiceTest.createLoan();
+		loan.setId(id);
+		loan.setBook(book);
+		
+		given( loanService.find(Mockito.any(LoanFilterDTO.class), Mockito.any(Pageable.class)) )
+        .willReturn( new PageImpl<Loan>( Arrays.asList(loan), PageRequest.of(0,100), 1 ) );
+
+		
+        String queryString = String.format("?isbn=%s&customer=%s&page=0&size=10",
+        		loan.getBook().getIsbn(), loan.getCustomer());
+
+    	var request = MockMvcRequestBuilders
+                .get(LOAN_API.concat(queryString))
+                .accept(MediaType.APPLICATION_JSON);
+
+        mvc
+            .perform( request )
+            .andExpect( status().isOk() )
+            .andExpect( jsonPath("content", Matchers.hasSize(1)))
+            .andExpect( jsonPath("totalElements").value(1) )
+            .andExpect( jsonPath("pageable.pageSize").value(10) )
+            .andExpect( jsonPath("pageable.pageNumber").value(0));
+		
+	}
 	
 	
 	private Book createBook() {

@@ -9,6 +9,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -16,13 +18,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import br.com.workmade.libraryApi.dtos.LoanFilterDTO;
 import br.com.workmade.libraryApi.exception.AlreadyLoanedBookFoundException;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.models.Loan;
-import br.com.workmade.libraryApi.repository.BookRepositoryTest;
 import br.com.workmade.libraryApi.repository.LoanRepository;
 import br.com.workmade.libraryApi.services.BookService;
 import br.com.workmade.libraryApi.services.LoanService;
@@ -125,7 +131,37 @@ public class LoanServiceTest {
     	
     }
     
-    private Loan createLoan(){
+    @Test
+    @DisplayName("Deve filtrar empréstimos pelas propriedades")
+    public void findLoanTest(){
+        //cenario
+        LoanFilterDTO loanFilterDTO = LoanFilterDTO.builder().customer("Fulano").isbn("321").build();
+
+        Loan loan = createLoan();
+        loan.setId(1l);
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        List<Loan> lista = Arrays.asList(loan);
+
+        Page<Loan> page = new PageImpl<Loan>(lista, pageRequest, lista.size());
+        when( loanRepository.findByBookIsbnOrCustomer(
+                    Mockito.anyString(),
+                    Mockito.anyString(),
+                    Mockito.any(PageRequest.class))
+        )
+                .thenReturn(page);
+
+        //execucao
+        Page<Loan> result = loanService.find( loanFilterDTO, pageRequest );
+
+
+        //verificacoes
+        assertThat(result.getTotalElements()).isEqualTo(1);
+        assertThat(result.getContent()).isEqualTo(lista);
+        assertThat(result.getPageable().getPageNumber()).isEqualTo(0);
+        assertThat(result.getPageable().getPageSize()).isEqualTo(10);
+    }
+    
+    public static Loan createLoan(){
 		Book book = Book.builder().title("Aventuras").author("Fulano").isbn("123").build();
     	Loan loan = Loan.builder().book(book).customer("Fulano").loanDate(LocalDate.now()).build();
         return loan;
