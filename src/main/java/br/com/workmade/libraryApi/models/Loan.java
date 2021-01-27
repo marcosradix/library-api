@@ -2,6 +2,7 @@ package br.com.workmade.libraryApi.models;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,8 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     private String customer;
-    
+    @Column(name= "customer_email")
+    private String customerEmail;
 	private LocalDate loanDate;
 	private Boolean returned;
 	

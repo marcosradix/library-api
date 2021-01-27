@@ -17,7 +17,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.workmade.libraryApi.models.Book;
-import br.com.workmade.libraryApi.repository.BookRepository;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")

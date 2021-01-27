@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.workmade.libraryApi.dtos.BookDTO;
+import br.com.workmade.libraryApi.dtos.LoanDTO;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.services.BookService;
+import br.com.workmade.libraryApi.services.LoanService;
 
 @RestController
 @RequestMapping("/api/books")
@@ -36,6 +38,8 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
+	
+	private LoanService loanService;
 	
 	
     @PostMapping
@@ -86,8 +90,21 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.OK).body(bookFoundDTO);
     }
     
-    
-    
+    @GetMapping("{id}/loans")
+    public ResponseEntity<Page<LoanDTO>> loanByBook(@PathVariable Long id, Pageable pageable){
+    	Book book = bookService.findById(id);
+    	Page<LoanDTO> result = loanService.getLoansByBook(book,pageable);
+    	List<LoanDTO> listLoanDTO = result.getContent().stream().map(loan ->{
+    		Book loanBook = loan.getBook();
+    		
+    		LoanDTO loanDTO = modelMapper.map(loan, LoanDTO.class);
+    		loanDTO.setBook(loanBook);
+    		return loanDTO;
+    	}).collect(Collectors.toList());
+    	PageImpl<LoanDTO> pageImpl = new PageImpl<LoanDTO>(listLoanDTO, pageable, result.getTotalElements());
+    	return ResponseEntity.ok(pageImpl);
+    	
+    }
     
     
     @DeleteMapping("/{id}/remover")

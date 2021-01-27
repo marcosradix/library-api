@@ -9,8 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.workmade.libraryApi.dtos.LoanDTO;
 import br.com.workmade.libraryApi.dtos.LoanFilterDTO;
 import br.com.workmade.libraryApi.exception.AlreadyLoanedBookFoundException;
+import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.models.Loan;
 import br.com.workmade.libraryApi.repository.LoanRepository;
 import br.com.workmade.libraryApi.services.BookService;
@@ -51,5 +53,10 @@ public class LoanServiceImpl implements LoanService {
         LocalDate threeDaysAgo = LocalDate.now().minusDays(loanDays);
         return loanRepository.findByLoanDateLessThanAndNotReturned(threeDaysAgo);
     }
+
+	@Override
+	public Page<LoanDTO> getLoansByBook(Book book, Pageable pageable) {
+		return loanRepository.findByBook(book, pageable);
+	}
 
 }
