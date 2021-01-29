@@ -16,7 +16,9 @@
 	<description>Projeto de livraria usando TDD</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>14</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
@@ -73,6 +75,13 @@
 			<version>2.3.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+
+
 	</dependencies>
 
 	<build>
@@ -93,14 +102,14 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.5</version>
-				 <configuration>
-                    <excludes>
-                       <!-- Exclude class from test coverage -->
-                        <exclude>br/com/workmade/libraryApi/dtos/*.*</exclude>
-                        <!-- Exclude full package from test coverage -->
-                        <exclude>br/com/workmade/libraryApi/models/*.*</exclude>
-                    </excludes>
-                </configuration>
+				<configuration>
+					<excludes>
+						<!-- Exclude class from test coverage -->
+						<exclude>br/com/workmade/libraryApi/dtos/*.*</exclude>
+						<!-- Exclude full package from test coverage -->
+						<exclude>br/com/workmade/libraryApi/models/*.*</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>

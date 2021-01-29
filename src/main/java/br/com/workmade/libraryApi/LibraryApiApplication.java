@@ -5,7 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
+
+
 
 @SpringBootApplication
 @EnableScheduling
@@ -22,11 +23,5 @@ public class LibraryApiApplication {
 	        return modelMapper;
 	    }
 	   
-	  //segundo minuto hora dia mês ano
-	   @Scheduled(cron = "0 29 7 1/1 * ?")
-	   private void tarefasAgendadas() { 
-		   System.out.println("[TAREFAS] AGENDAMENTO FUNCIONANDO COM SUCESSO");
-		   
-	   }
 
 }
