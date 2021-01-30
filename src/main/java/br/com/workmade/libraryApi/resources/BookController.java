@@ -28,9 +28,14 @@ import br.com.workmade.libraryApi.dtos.LoanDTO;
 import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.services.BookService;
 import br.com.workmade.libraryApi.services.LoanService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/books")
+@Api("Book Api")
 public class BookController {
 	
 	@Autowired
@@ -41,6 +46,8 @@ public class BookController {
 	
 	private LoanService loanService;
 	
+	@ApiOperation("CREATE BOOK")
+	@ApiResponses({@ApiResponse(code = 201, message = "livro salvo com sucesso")})
 	
     @PostMapping
     public ResponseEntity<BookDTO> save(@RequestBody @Valid BookDTO bookDTO) {

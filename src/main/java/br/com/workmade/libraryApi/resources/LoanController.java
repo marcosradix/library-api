@@ -27,11 +27,14 @@ import br.com.workmade.libraryApi.models.Book;
 import br.com.workmade.libraryApi.models.Loan;
 import br.com.workmade.libraryApi.services.BookService;
 import br.com.workmade.libraryApi.services.LoanService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/loans")
 @RequiredArgsConstructor
+@Api("Loan Api")
 public class LoanController {
 	
 	@Autowired
@@ -43,6 +46,7 @@ public class LoanController {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	@ApiOperation("CREATE LOAN")
 	@PostMapping
 	public ResponseEntity<Long> create(@RequestBody LoanDTO loanDTO){
 		Book book = bookService.findByIsbn(loanDTO.getIsbn());
