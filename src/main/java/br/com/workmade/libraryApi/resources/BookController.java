@@ -32,10 +32,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/books")
 @Api("Book Api")
+@Slf4j
 public class BookController {
 	
 	@Autowired
@@ -51,7 +53,7 @@ public class BookController {
 	
     @PostMapping
     public ResponseEntity<BookDTO> save(@RequestBody @Valid BookDTO bookDTO) {
-    	
+    	log.info("SALVANDO LIVRO: "+ bookDTO.toString());
     	Book newBook = modelMapper.map(bookDTO, Book.class);
     	
     	Book bookSaved = bookService.save(newBook);

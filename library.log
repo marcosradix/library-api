@@ -1,0 +1,266 @@
+2021-01-30 11:48:19.011  INFO 3610 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Starting LibraryApiApplication using Java 14.0.2 on MacBook-Pro-de-mac.local with PID 3610 (/Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api/target/classes started by marcosferreira in /Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api)
+2021-01-30 11:48:19.011  INFO 3610 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : No active profile set, falling back to default profiles: default
+2021-01-30 11:48:19.312  INFO 3610 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-30 11:48:19.325  INFO 3610 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 2 JPA repository interfaces.
+2021-01-30 11:48:19.429  INFO 3610 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-30 11:48:19.430  INFO 3610 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-30 11:48:19.430  INFO 3610 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-01-30 11:48:19.442  INFO 3610 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-30 11:48:19.442  INFO 3610 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 428 ms
+2021-01-30 11:48:19.468  INFO 3610 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2021-01-30 11:48:19.470  INFO 3610 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2021-01-30 11:48:19.470  INFO 3610 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ff9eb2db-1da3-4d63-a23f-4f7dbd2f8965'
+2021-01-30 11:48:19.502  INFO 3610 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-30 11:48:19.506  INFO 3610 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-01-30 11:48:19.545  INFO 3610 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-30 11:48:19.546  INFO 3610 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:48:19.562  INFO 3610 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-01-30 11:48:19.717  WARN 3610 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-30 11:48:19.784  INFO 3610 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-01-30 11:48:19.808  INFO 3610 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-30 11:48:19.848  INFO 3610 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:48:20.650  INFO 3610 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-01-30 11:48:20.674  INFO 3610 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-01-30 11:48:20.675  INFO 3610 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-30 11:48:20.676  INFO 3610 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-30 11:48:20.684  INFO 3610 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-30 11:48:20.717  INFO 3610 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-01-30 11:48:20.728  INFO 3610 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Started LibraryApiApplication in 1.761 seconds (JVM running for 135.838)
+2021-01-30 11:48:20.732  INFO 3610 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   LogFileWebEndpointAutoConfiguration#logFileWebEndpoint matched:
+      - Log File found logging.file.name library.log (LogFileWebEndpointAutoConfiguration.LogFileCondition)
+      - @ConditionalOnMissingBean (types: org.springframework.boot.actuate.logging.LogFileWebEndpoint; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2021-01-30 11:48:23.205  INFO 3610 --- [RMI TCP Connection(15)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-01-30 11:48:23.222  INFO 3610 --- [RMI TCP Connection(15)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2021-01-30 11:48:23.222  INFO 3610 --- [RMI TCP Connection(15)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:48:23.224  INFO 3610 --- [RMI TCP Connection(15)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:48:23.224  INFO 3610 --- [RMI TCP Connection(15)-127.0.0.1] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-01-30 11:48:23.427  WARN 3610 --- [RMI TCP Connection(15)-127.0.0.1] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2021-01-30 11:48:23.428  INFO 3610 --- [RMI TCP Connection(15)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2021-01-30 11:48:23.429  INFO 3610 --- [RMI TCP Connection(15)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2021-01-30 11:48:26.348  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Starting LibraryApiApplication using Java 14.0.2 on MacBook-Pro-de-mac.local with PID 3644 (/Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api/target/classes started by marcosferreira in /Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api)
+2021-01-30 11:48:26.351  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : No active profile set, falling back to default profiles: default
+2021-01-30 11:48:26.433  INFO 3644 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-01-30 11:48:26.433  INFO 3644 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-01-30 11:48:27.496  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-30 11:48:27.567  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 2 JPA repository interfaces.
+2021-01-30 11:48:28.059  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-30 11:48:28.067  INFO 3644 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-30 11:48:28.067  INFO 3644 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-01-30 11:48:28.140  INFO 3644 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-30 11:48:28.140  INFO 3644 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1706 ms
+2021-01-30 11:48:28.242  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-30 11:48:28.395  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-30 11:48:28.401  INFO 3644 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:e1ae1b31-92a7-4eb5-a604-98c4c4bec923'
+2021-01-30 11:48:28.529  INFO 3644 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-30 11:48:28.567  INFO 3644 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-30 11:48:28.666  INFO 3644 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-30 11:48:28.769  INFO 3644 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-01-30 11:48:29.341  INFO 3644 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-30 11:48:29.348  INFO 3644 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:48:29.385  INFO 3644 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-01-30 11:48:30.005  WARN 3644 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-30 11:48:30.173  INFO 3644 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-01-30 11:48:30.234  INFO 3644 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-30 11:48:30.321  INFO 3644 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:48:31.188  INFO 3644 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-01-30 11:48:31.241  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-01-30 11:48:31.242  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-30 11:48:31.261  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-30 11:48:31.291  INFO 3644 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-30 11:48:31.437  INFO 3644 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-01-30 11:48:31.464  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Started LibraryApiApplication in 5.507 seconds (JVM running for 6.115)
+2021-01-30 11:48:32.358  INFO 3644 --- [RMI TCP Connection(3)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-01-30 11:48:32.358  INFO 3644 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-01-30 11:48:32.360  INFO 3644 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-01-30 11:51:31.301  INFO 3644 --- [Thread-4] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2021-01-30 11:51:31.302  INFO 3644 --- [Thread-4] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:51:31.306  INFO 3644 --- [Thread-4] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:51:31.306  INFO 3644 --- [Thread-4] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-01-30 11:51:31.524  WARN 3644 --- [Thread-4] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2021-01-30 11:51:31.526  INFO 3644 --- [Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-30 11:51:31.528  INFO 3644 --- [Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-30 11:51:31.610  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Starting LibraryApiApplication using Java 14.0.2 on MacBook-Pro-de-mac.local with PID 3644 (/Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api/target/classes started by marcosferreira in /Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api)
+2021-01-30 11:51:31.610  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : No active profile set, falling back to default profiles: default
+2021-01-30 11:51:31.944  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-30 11:51:31.954  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 2 JPA repository interfaces.
+2021-01-30 11:51:32.052  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-30 11:51:32.053  INFO 3644 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-30 11:51:32.053  INFO 3644 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-01-30 11:51:32.064  INFO 3644 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-30 11:51:32.065  INFO 3644 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 451 ms
+2021-01-30 11:51:32.094  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2021-01-30 11:51:32.096  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2021-01-30 11:51:32.096  INFO 3644 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:82d443e7-8fc4-4c6c-a206-d5e12ca6668a'
+2021-01-30 11:51:32.129  INFO 3644 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-30 11:51:32.133  INFO 3644 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-01-30 11:51:32.177  INFO 3644 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-30 11:51:32.177  INFO 3644 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:51:32.189  INFO 3644 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-01-30 11:51:32.323  WARN 3644 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-30 11:51:32.387  INFO 3644 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-01-30 11:51:32.410  INFO 3644 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-30 11:51:32.446  INFO 3644 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:51:33.231  INFO 3644 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-01-30 11:51:33.251  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-01-30 11:51:33.252  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-30 11:51:33.253  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-30 11:51:33.263  INFO 3644 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-30 11:51:33.307  INFO 3644 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-01-30 11:51:33.318  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Started LibraryApiApplication in 1.82 seconds (JVM running for 188.051)
+2021-01-30 11:51:33.321  INFO 3644 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2021-01-30 11:51:36.684  INFO 3644 --- [Thread-8] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2021-01-30 11:51:36.685  INFO 3644 --- [Thread-8] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:51:36.686  INFO 3644 --- [Thread-8] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:51:36.687  INFO 3644 --- [Thread-8] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-01-30 11:51:36.891  WARN 3644 --- [Thread-8] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2021-01-30 11:51:36.892  INFO 3644 --- [Thread-8] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2021-01-30 11:51:36.893  INFO 3644 --- [Thread-8] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2021-01-30 11:51:36.963  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Starting LibraryApiApplication using Java 14.0.2 on MacBook-Pro-de-mac.local with PID 3644 (/Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api/target/classes started by marcosferreira in /Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api)
+2021-01-30 11:51:36.963  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : No active profile set, falling back to default profiles: default
+2021-01-30 11:51:37.278  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-30 11:51:37.288  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 2 JPA repository interfaces.
+2021-01-30 11:51:37.372  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-30 11:51:37.373  INFO 3644 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-30 11:51:37.373  INFO 3644 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-01-30 11:51:37.385  INFO 3644 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-30 11:51:37.385  INFO 3644 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 419 ms
+2021-01-30 11:51:37.413  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2021-01-30 11:51:37.415  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2021-01-30 11:51:37.415  INFO 3644 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:517f747d-1109-4002-9dcc-7f1a20cb8366'
+2021-01-30 11:51:37.447  INFO 3644 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-30 11:51:37.453  INFO 3644 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-01-30 11:51:37.494  INFO 3644 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-30 11:51:37.494  INFO 3644 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:51:37.506  INFO 3644 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-01-30 11:51:37.639  WARN 3644 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-30 11:51:37.694  INFO 3644 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-01-30 11:51:37.715  INFO 3644 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-30 11:51:37.748  INFO 3644 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:51:38.485  INFO 3644 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-01-30 11:51:38.504  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-01-30 11:51:38.504  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-30 11:51:38.505  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-30 11:51:38.512  INFO 3644 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-30 11:51:38.544  INFO 3644 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-01-30 11:51:38.555  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Started LibraryApiApplication in 1.613 seconds (JVM running for 193.288)
+2021-01-30 11:51:38.557  INFO 3644 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2021-01-30 11:52:37.783  INFO 3644 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-01-30 11:52:37.783  INFO 3644 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-01-30 11:52:37.785  INFO 3644 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-01-30 11:53:12.644  INFO 3644 --- [http-nio-8080-exec-9] b.c.w.l.resources.BookController         : SALVANDO LIVRO
+2021-01-30 11:53:40.108  INFO 3644 --- [Thread-14] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2021-01-30 11:53:40.109  INFO 3644 --- [Thread-14] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:53:40.111  INFO 3644 --- [Thread-14] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:53:40.111  INFO 3644 --- [Thread-14] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-01-30 11:53:40.317  WARN 3644 --- [Thread-14] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2021-01-30 11:53:40.318  INFO 3644 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2021-01-30 11:53:40.320  INFO 3644 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2021-01-30 11:53:40.399  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Starting LibraryApiApplication using Java 14.0.2 on MacBook-Pro-de-mac.local with PID 3644 (/Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api/target/classes started by marcosferreira in /Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api)
+2021-01-30 11:53:40.399  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : No active profile set, falling back to default profiles: default
+2021-01-30 11:53:40.688  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-30 11:53:40.698  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 2 JPA repository interfaces.
+2021-01-30 11:53:40.777  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-30 11:53:40.778  INFO 3644 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-30 11:53:40.778  INFO 3644 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-01-30 11:53:40.789  INFO 3644 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-30 11:53:40.789  INFO 3644 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 387 ms
+2021-01-30 11:53:40.815  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2021-01-30 11:53:40.818  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2021-01-30 11:53:40.818  INFO 3644 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:19d68e01-05c6-4a66-b8c6-50afe7b24e32'
+2021-01-30 11:53:40.850  INFO 3644 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-30 11:53:40.855  INFO 3644 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-01-30 11:53:40.891  INFO 3644 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-30 11:53:40.892  INFO 3644 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:53:40.904  INFO 3644 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-01-30 11:53:41.030  WARN 3644 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-30 11:53:41.084  INFO 3644 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-01-30 11:53:41.107  INFO 3644 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-30 11:53:41.136  INFO 3644 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:53:41.928  INFO 3644 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-01-30 11:53:41.947  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-01-30 11:53:41.948  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-30 11:53:41.949  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-30 11:53:41.957  INFO 3644 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-30 11:53:41.994  INFO 3644 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-01-30 11:53:42.004  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Started LibraryApiApplication in 1.634 seconds (JVM running for 316.741)
+2021-01-30 11:53:42.006  INFO 3644 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2021-01-30 11:53:45.174  INFO 3644 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-01-30 11:53:45.175  INFO 3644 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-01-30 11:53:45.176  INFO 3644 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-01-30 11:54:23.805  INFO 3644 --- [http-nio-8080-exec-10] b.c.w.l.resources.BookController         : SALVANDO LIVRO: BookDTO(id=null, title=Teste de log actuator, author=Autor de teste, isbn=123)
+2021-01-30 11:58:40.106  INFO 3644 --- [Thread-19] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2021-01-30 11:58:40.106  INFO 3644 --- [Thread-19] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:58:40.108  INFO 3644 --- [Thread-19] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:58:40.108  INFO 3644 --- [Thread-19] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-01-30 11:58:40.316  WARN 3644 --- [Thread-19] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2021-01-30 11:58:40.317  INFO 3644 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2021-01-30 11:58:40.319  INFO 3644 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2021-01-30 11:58:40.403  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Starting LibraryApiApplication using Java 14.0.2 on MacBook-Pro-de-mac.local with PID 3644 (/Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api/target/classes started by marcosferreira in /Users/marcosferreira/Documents/workspace-spring-tool-suite-4-4.8.1.RELEASE/library-api)
+2021-01-30 11:58:40.404  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : No active profile set, falling back to default profiles: default
+2021-01-30 11:58:40.704  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-30 11:58:40.715  INFO 3644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 2 JPA repository interfaces.
+2021-01-30 11:58:40.791  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-30 11:58:40.792  INFO 3644 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-30 11:58:40.792  INFO 3644 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-01-30 11:58:40.802  INFO 3644 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-30 11:58:40.802  INFO 3644 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 397 ms
+2021-01-30 11:58:40.829  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2021-01-30 11:58:40.830  INFO 3644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2021-01-30 11:58:40.830  INFO 3644 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:f04433f1-2211-4b02-81d1-1762a98ae0f6'
+2021-01-30 11:58:40.862  INFO 3644 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-30 11:58:40.867  INFO 3644 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-01-30 11:58:40.903  INFO 3644 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-30 11:58:40.903  INFO 3644 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:58:40.913  INFO 3644 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-01-30 11:58:41.033  WARN 3644 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-30 11:58:41.084  INFO 3644 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-01-30 11:58:41.106  INFO 3644 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-30 11:58:41.136  INFO 3644 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:58:41.925  INFO 3644 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-01-30 11:58:41.944  INFO 3644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-01-30 11:58:41.945  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-30 11:58:41.945  INFO 3644 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-30 11:58:41.951  INFO 3644 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-30 11:58:41.980  INFO 3644 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-01-30 11:58:41.990  INFO 3644 --- [restartedMain] b.c.w.libraryApi.LibraryApiApplication   : Started LibraryApiApplication in 1.617 seconds (JVM running for 616.737)
+2021-01-30 11:58:41.993  INFO 3644 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2021-01-30 11:58:43.375  INFO 3644 --- [RMI TCP Connection(30)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-01-30 11:58:43.390  INFO 3644 --- [RMI TCP Connection(30)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2021-01-30 11:58:43.391  INFO 3644 --- [RMI TCP Connection(30)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-01-30 11:58:43.393  INFO 3644 --- [RMI TCP Connection(30)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-30 11:58:43.393  INFO 3644 --- [RMI TCP Connection(30)-127.0.0.1] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-01-30 11:58:43.599  WARN 3644 --- [RMI TCP Connection(30)-127.0.0.1] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2021-01-30 11:58:43.599  INFO 3644 --- [RMI TCP Connection(30)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2021-01-30 11:58:43.601  INFO 3644 --- [RMI TCP Connection(30)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
