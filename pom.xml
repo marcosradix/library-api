@@ -124,6 +124,7 @@
 						<exclude>br/com/workmade/libraryApi/dtos/*.*</exclude>
 						<!-- Exclude full package from test coverage -->
 						<exclude>br/com/workmade/libraryApi/models/*.*</exclude>
+						<exclude>br/com/workmade/libraryApi/core/EmailProperties.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
