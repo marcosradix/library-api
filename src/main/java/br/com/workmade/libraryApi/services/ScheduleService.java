@@ -19,16 +19,19 @@ public class ScheduleService {
 
 	private final LoanService loanService;
 	
-	private EmailService emailService;
+	private final EmailService emailService;
 	
-	private EmailProperties emailProperties;
+	private final EmailProperties emailProperties;
 	
 	
 	@Scheduled(cron = CRON_LATE_LOANS)
 	public void sendEmailToLateLoans() {
 		List<Loan> allLateLoans = loanService.getAllLateLoans();
-		List<String> mailsList = allLateLoans.stream().map(loan -> loan.getCustomer()).collect(Collectors.toList());
-		emailService.sendEmails(mailsList, emailProperties.getMessage());
+		List<String> mailsList = allLateLoans.stream().map(loan -> loan.getCustomerEmail()).collect(Collectors.toList());
+		if(!mailsList.isEmpty()) {
+			emailService.sendEmails(mailsList, emailProperties.getMessage());
+			
+		}
 		
 	}
 

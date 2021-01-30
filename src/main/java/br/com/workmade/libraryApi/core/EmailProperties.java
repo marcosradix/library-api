@@ -12,5 +12,10 @@ public class EmailProperties {
 	 * email message to send
 	 */
 	private String message;
+	
+	/**
+	 * email remetent
+	 */
+	private String remetent;
 
 }
